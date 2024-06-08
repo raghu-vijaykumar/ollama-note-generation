@@ -1,4 +1,7 @@
 llama3-env/*
 __pycache__/*
-notes*
+notes/*
 transcript.txt
+input/*
+archive/*
+blogs/*
