@@ -1,0 +1,4 @@
+llama3-env/*
+__pycache__/*
+notes*
+transcript.txt
