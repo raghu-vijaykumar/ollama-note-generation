@@ -32,7 +32,7 @@ def main(input_dir, notes_dir, blog_dir, archive_dir, max_tokens, max_threads):
             # Generate notes
             filename = os.path.basename(file_path)
             notes_file = os.path.join(notes_dir, os.path.splitext(filename)[0] + ".md")
-            notes_generator.process_transcript(file_path, notes_file)
+            # notes_generator.process_transcript(file_path, notes_file)
 
             # Generate blog
             blog_file = os.path.join(
