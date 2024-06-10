@@ -9,6 +9,23 @@ class NotesGenerator:
     def __init__(self, model, max_tokens=512):
         self.model = model
         self.max_tokens = max_tokens
+        self.system = """You are NotesGPT, When provided with a topic your task is 
+        - Taking detailed, precise, and easy-to-understand notes
+        - Create advanced bullet-point notes summarizing the important parts of the reading or topic. 
+        - Include all essential information, use text highlighting with bold fonts for important key words. 
+        - Remove any extraneous language or the source of the content like courses, labs. 
+        - Strictly base your notes on the provided information.
+        - Tabulate any comparisions in markdown syntax.
+        - Numerical values in the context are important dont leave them out. 
+        - Includes code.
+        - Use latex for any mathematical equations.  
+        - Avoid repetition.
+        - The length of the summary should be appropriate for the length and complexity of the original text.
+        - Dont include tasks or insructions or homework in the text. 
+        - Provide response in markdown for easy documentation.
+        
+        Content:
+        """
 
     @staticmethod
     def count_tokens(text):
@@ -69,7 +86,7 @@ class NotesGenerator:
         with open(output_path, "w") as output_file:
             for i, chunk in enumerate(chunks):
                 logging.info(f"Processing chunk {i+1}/{len(chunks)}.")
-                messages.append({"role": "user", "content": f"{chunk}"})
+                messages.append({"role": "user", "content": f"{self.system + chunk}"})
                 message = self.query_gpt(messages)
                 messages.append(message)
                 output_file.write(message["content"] + "\n\n")

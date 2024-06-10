@@ -49,7 +49,7 @@ def process_blog_to_post(blog_file, post_generator):
 
 def run_transcript_to_notes(max_threads, notes_dir):
     text_dir = "./text"  # Replace with your input directory path
-    notes_generator = NotesGenerator(model="notes-phi3:14b", max_tokens=4096)
+    notes_generator = NotesGenerator(model="phi3:14b", max_tokens=4096)
 
     # Ensure the notes directory exists
     os.makedirs(notes_dir, exist_ok=True)
