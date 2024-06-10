@@ -5,9 +5,7 @@ import logging
 import shutil
 import sys
 
-from blog_generator import BlogGenerator
 from notes_generator import NotesGenerator
-from post_generator import PostGenerator
 
 # Set up logging
 logging.basicConfig(

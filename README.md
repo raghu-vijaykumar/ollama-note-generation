@@ -1,20 +1,22 @@
-# Notes Generator
+# Notes Generation Pipeline
+
+This project processes `.raw.txt` files to generate detailed notes using the `ollama` library. The project supports processing multiple files in parallel.
+
+## Requirements
+
+- Install ollama: https://www.ollama.com/download/linux
+- Install phi3:14b model: https://www.ollama.com/library/phi3:14b (You can try out any llm, its all about prompting)
 
 ## Setup
 
-```powershell
-python -m venv .env
-.\.env\Scripts\Activate.ps1
-python.exe -m pip install --upgrade pip
-pip install -r .\requirements.txt
-```
+```sh
+# Set Up Virtual Environment
+python -m venv venv
+source venv/bin/activate
 
-## Running
+# Install python packages
+pip install -r requirements.txt
 
-```powershell
-# Run the model
-ollama run phi3:14b
-
-# Run the notes generation pipeline
-python app.py raw_to_notes 2 phi3:14b "G:\My Drive\workspace\study-new"
+# Run the pipeline
+python app.py raw_to_notes 2 phi3:14b ./transcript
 ```
