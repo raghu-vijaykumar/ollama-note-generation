@@ -6,3 +6,5 @@ input/*
 archive/*
 blogs/*
 text/*
+
+.env/*

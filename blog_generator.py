@@ -11,7 +11,7 @@ class BlogGenerator:
     def __init__(self, model):
         self.model = model
         self.system = """You are a BlogGPT, you know how to write informative 
-        and engaging articles.
+        and engaging tech articles.
         """
 
     def read_markdown_files(self, notes_dir):
@@ -21,7 +21,7 @@ class BlogGenerator:
 
     def ollama_gen(self, content):
         """Generates a blog from the given concepts using the model."""
-        prompt = "Generate a detailed blog with 5000-10000 words:\n\n" f"{content}"
+        prompt = "Rewrite this as a blog article 5000-10000 words:\n\n" f"{content}"
         messages = [
             # {"role": "system", "content": system_prompt},
             {"role": "user", "content": self.system + "\n" + prompt},

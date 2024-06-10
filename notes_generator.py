@@ -1,7 +1,6 @@
 import logging
 import os
 import time
-
 import ollama
 
 
@@ -72,7 +71,7 @@ class NotesGenerator:
         )
         return response["message"]
 
-    def process_transcript(self, file_path, output_path):
+    def process_transcript(self, file_path):
         """Reads a transcript file, splits it, and generates notes."""
         logging.info(f"Reading transcript from {file_path}.")
         with open(file_path, "r") as file:
@@ -80,8 +79,10 @@ class NotesGenerator:
         start_time = time.time()
         chunks = self.split_text(transcript)
 
-        # Create the output directory if it doesn't exist
-        os.makedirs(os.path.dirname(output_path), exist_ok=True)
+        # Determine output path for notes
+        model_name = self.model.replace(":", "_")
+        output_path = os.path.splitext(file_path)[0] + f".{model_name}" + ".notes.md"
+
         messages = []
         with open(output_path, "w") as output_file:
             for i, chunk in enumerate(chunks):
@@ -96,39 +97,3 @@ class NotesGenerator:
         logging.info(
             f"Finished processing all chunks in {end_time - start_time:.2f} seconds."
         )
-
-    @staticmethod
-    def max_words_in_paragraphs(file_path):
-        """Calculates the maximum number of words in any paragraph from an input file."""
-        with open(file_path, "r") as file:
-            content = file.read()
-
-        # Split content into paragraphs
-        paragraphs = content.split("\n\n")
-
-        max_words = 0
-        for paragraph in paragraphs:
-            word_count = NotesGenerator.count_tokens(paragraph)
-            if word_count > max_words:
-                max_words = word_count
-
-        return max_words
-
-    @staticmethod
-    def count_paragraphs_and_average_words(file_path):
-        """Counts the number of paragraphs and calculates the average number of words per paragraph."""
-        with open(file_path, "r") as file:
-            content = file.read()
-        # Split content into paragraphs
-        paragraphs = content.split("\n\n")
-        # Count the number of paragraphs
-        num_paragraphs = len(paragraphs)
-        # Calculate the total number of words
-        total_words = sum(
-            len(paragraph.split()) for paragraph in paragraphs if paragraph.strip()
-        )
-        # Calculate the average number of words per paragraph
-        avg_words_per_paragraph = (
-            total_words / num_paragraphs if num_paragraphs > 0 else 0
-        )
-        return num_paragraphs, avg_words_per_paragraph
