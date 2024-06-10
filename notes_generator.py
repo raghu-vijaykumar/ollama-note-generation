@@ -74,7 +74,7 @@ class NotesGenerator:
     def process_transcript(self, file_path):
         """Reads a transcript file, splits it, and generates notes."""
         logging.info(f"Reading transcript from {file_path}.")
-        with open(file_path, "r") as file:
+        with open(file_path, "r", encoding="utf-8") as file:
             transcript = file.read()
         start_time = time.time()
         chunks = self.split_text(transcript)
@@ -84,7 +84,7 @@ class NotesGenerator:
         output_path = os.path.splitext(file_path)[0] + f".{model_name}" + ".notes.md"
 
         messages = []
-        with open(output_path, "w") as output_file:
+        with open(output_path, "w", encoding="utf-8") as output_file:
             for i, chunk in enumerate(chunks):
                 logging.info(f"Processing chunk {i+1}/{len(chunks)}.")
                 messages.append({"role": "user", "content": f"{self.system + chunk}"})

@@ -28,14 +28,14 @@ class PostGenerator:
     def process_blog(self, blog_file):
         """Processes a blog file to generate a LinkedIn post and save it in the same directory."""
         try:
-            with open(blog_file, "r") as bf:
+            with open(blog_file, "r", encoding="utf-8") as bf:
                 blog_content = bf.read()
 
             post_content = self.generate_post(blog_content)
 
             post_filename = os.path.basename(blog_file).replace(".md", ".post.md")
             post_filepath = os.path.join(os.path.dirname(blog_file), post_filename)
-            with open(post_filepath, "w") as pf:
+            with open(post_filepath, "w", encoding="utf-8") as pf:
                 pf.write(post_content)
 
             logging.info(f"Saved LinkedIn post to {post_filepath}")

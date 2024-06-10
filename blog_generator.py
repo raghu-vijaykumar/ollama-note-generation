@@ -36,13 +36,13 @@ class BlogGenerator:
         logging.info(f"Blog generation input length: {len(content)}")
         main_blog_content = self.ollama_gen(content)
         mainblog_filepath = os.path.join(base_dir, base_filename + ".md")
-        with open(mainblog_filepath, "w") as bf:
+        with open(mainblog_filepath, "w", encoding="utf-8") as bf:
             bf.write(main_blog_content)
 
     def process_notes(self, notes_file, blog_dir, base_filename):
         """Processes a markdown file and generates a blog."""
         logging.info(f"Reading notes from {notes_file}.")
-        with open(notes_file, "r") as file:
+        with open(notes_file, "r", encoding="utf-8") as file:
             content = file.read()
 
         logging.info(f"Generating blog for {notes_file}.")
